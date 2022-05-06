@@ -6,9 +6,6 @@
 ###  Description du fichier: classe emprunt
 ###  Travail basé sur l'exercice_Interface_graphique_Propriété de Hasna Hocini surtout méthode d'annotation
 ####################################################################################
-"""
-import classe  Abbonement et Detail
-"""
 class Emprunt:
     """
     classe Emprunt
@@ -27,6 +24,11 @@ class Emprunt:
         self.date_emprunt = p_date_emprunt
         self.list = p_list_detail
         self.abonner= p_abonner
+
+    ##################################################
+    ####   Propriétés, accesseurs et mutateurs    ####
+    ####                                          ####
+    ##################################################
 
     def _get_code_emprunt(self):
         """
