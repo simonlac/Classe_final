@@ -42,7 +42,7 @@ class Jeux(Document):
 
      def _get_createur(self):
          """
-         Accès à l'attribut privée du genre
+         Accès à l'attribut privée du créateur
          """
 
          return self.__createur
