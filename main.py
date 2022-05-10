@@ -31,7 +31,7 @@ from PyQt5.QtCore import QDate
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
 # importer les interfaces graphiques
-import bibliotheque_prin
+import bibliotheque
 from abonnement_inter import *
 from emprunt_inter import *
 from livre_inter import *
@@ -96,7 +96,7 @@ def verifier_emprunt(p_code_emprunt ):
             return True
     return False
 
-def cacher_labels_erreur(objet):
+def cacher_labels_erreur_abonner(objet):
     """
     Cacher les différents labels d'erreur abonnement
     """
@@ -106,26 +106,42 @@ def cacher_labels_erreur(objet):
     objet.label_erreur_code_inv_nom.setVisible(False)
     objet.label_erreur_abonnement.setVisible(False)
     objet.label_erreur_code_inv_cour_tele.setVisible(False)
-# emprunt
+
+def cacher_labels_erreur_emprunt(objet):
+    """
+    Cacher les différents labels d'erreur emprunt
+    """
     objet.label_erreur_code_emprunt.setVisible(False)
     objet.label_erreur_code_inv_emprunt.setVisible(False)
     objet.label_erreur_code_inv_document_emprunt.setVisible(False)
     objet.label_erreur_code_inv_abonnement_emprunt.setVisible(False)
     objet.label_erreur_emprunt.setVisible(False)
-# film
+
+def cacher_labels_erreur_film(objet):
+    """
+    Cacher les différents labels d'erreur de film
+    """
     objet.label_erreur_code_film.setVisible(False)
     objet.label_erreur_code_inv_film.setVisible(False)
     objet.label_erreur_nb_rangee_film.setVisible(False)
     objet.label_erreur_genre.setVisible(False)
     objet.label_erreur_annee.setVisible(False)
     objet.label_erreur_realisateur.setVisible(False)
-# jeux
+
+def cacher_labels_erreur_jeux(objet):
+    """
+    Cacher les différents labels d'erreur de jeux
+    """
     objet.label_erreur_code_jeux.setVisible(False)
     objet.label_erreur_code_inv_jeux.setVisible(False)
     objet.label_erreur_nb_rangee_jeux.setVisible(False)
     objet.label_erreur_createur.setVisible(False)
     objet.label_erreur_nb_joueur.setVisible(False)
-# livre
+
+def cacher_labels_erreur_livre(objet):
+    """
+     Cacher les différents labels d'erreur de livre
+    """
     objet.label_erreur_code.setVisible(False)
     objet.label_erreur_code_inv.setVisible(False)
     objet.label_erreur_nb_rangee.setVisible(False)
@@ -138,26 +154,48 @@ def cacher_labels_erreur(objet):
 ########################################################
 # Créer une classe qui hérite de Qt et de notre ui.
 # Nom de ma classe (fenetrePrincipal)          # Nom de mon fichier ui
-class fenetreBibliotheque(QtWidgets.QMainWindow, bibliotheque.Ui.Ui_MainWindow):
+class fenetreBibliotheque(QtWidgets.QMainWindow, bibliotheque.Ui_Bibliothequecegep):
     """
     Nome de la classe : fenetreBibliotheque
     Héritages :
     - QtWidgets.QMainWindow : Type d'interface créé par QtDesigner
     - bibliotheque.Ui_MainWindow : Ma classe générée avec QtDesigner
     """
+
     def __init__(self, parent=None):
         """
         Constructeur de la classe
-        :param parent: QtWidgets.QMainWindow et interfacegraphique.Ui_MainWindow
+        :param parent: QtWidgets.QMainWindow et bibliotheque.Ui_MainWindow
         """
         # Appeler le constructeur parent avec ma classe en paramètre...
-        super(fenetrePrincipale, self).__init__(parent)
+        super(fenetreBibliotheque, self).__init__(parent)
         # Préparer l'interface utilisateur
         self.setupUi(self)
         # Donner un titre à la fenêtre principale
-        self.setWindowTitle("Gestion de scolarité")
-        # Cacher tous les labels d'erreur
-        cacher_labels_erreur(self)
+        self.setWindowTitle("Bibliothèque du cegep de l'outaouais")
 
-    # Utiliser le décorateur ici pour empêcher que le code du gestionnaire d'événement du bouton ne s'éxecute deux fois
-    @pyqtSlot()
+
+
+
+#################################
+###### PROGRAMME PRINCIPAL ######
+#################################
+
+# Créer le main qui lance la fenêtre de Qt
+
+def main():
+    """
+    Méthode main : point d'entré du programme.
+    Exécution de l'applicatin avec l'interface graphique.
+    reply = Dialog.exec_()
+    """
+    # Instancier une application et une fenetre principale
+    app = QtWidgets.QApplication(sys.argv)
+    form = fenetreBibliotheque()
+    # Afficher la fenêtre principale
+    form.show()
+    # Lancer l'application
+    app.exec()
+
+if __name__ == "__main__":
+    main()
