@@ -16,7 +16,7 @@ class Abbonement:
     #####  MÉTHODE CONSTRUCTEUR  #####
     ###################################
 
-    def __init__(self,p_code_abbonnement = "",p_type_abbonnement = "",p_prix= 0.0,p_duree = "",p_date = "",):
+    def __init__(self,p_code_abbonnement = "",p_type_abbonnement = "",p_prix= 0.0,p_duree = "",p_date = "",p_nom = "",p_courriel_tele = ""):
         """
              méthode constructeur avec paramètre de défaut
              définie les différents attributs des documents
@@ -26,6 +26,8 @@ class Abbonement:
         self.__prix = p_prix
         self.duree = p_duree
         self.date = p_date
+        self.__nom = p_nom
+        self.__courriel_tele = p_courriel_tele
 
         ##################################################
         ####   Propriétés, accesseurs et mutateurs    ####
@@ -67,6 +69,41 @@ class Abbonement:
 
     prix = property(_get_prix, _set_prix)
 
+    # propriété nom
+
+    def _get_nom (self):
+        """
+        Accès à l'attribut privée du nom
+        """
+
+        return self.__nom
+
+    def _set_nom(self, p_nom):
+        """
+        mutateur de __nom
+        """
+        if len(p_nom) <= 100:
+            self.__nom = p_nom
+
+    nom = property(_get_nom, _set_nom)
+
+    # propriété courriel_tele
+
+    def _get_courriel_tele(self):
+        """
+        Accès à l'attribut privée du courriel_tele
+        """
+
+        return self.__courriel_tele
+
+    def _set_courriel_tele(self, p_courriel_tele):
+        """
+        mutateur de __courriel_tele
+        """
+        if len(p_courriel_tele) <= 100:
+            self.__courriel_tele = p_courriel_tele
+
+    courriel_tele = property(_get_courriel_tele, _set_courriel_tele)
 
     def Calculer_total(self,prix,p_duree,p_type_abbonnement):
         """
@@ -99,6 +136,8 @@ class Abbonement:
                       "   Le prix : " + str(self.prix) + "\n" + \
                       "   La durée de l'abonnement: " + self.duree + "\n" + \
                       "   Le date du début de l'abbonement: " + self.date + "\n" + \
+                      "   Le nom de  l'abboner: " + self.nom + "\n" + \
+                      "   Le courriel ou téléphone de l'abonner: " + self.courriel_tele + "\n" + \
                       "\n" + "*" * 60
         return chaine_abbonnement
 
