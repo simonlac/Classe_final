@@ -19,7 +19,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.label_erreur_createur = QtWidgets.QLabel(self.centralwidget)
         self.label_erreur_createur.setEnabled(True)
-        self.label_erreur_createur.setGeometry(QtCore.QRect(490, 80, 441, 31))
+        self.label_erreur_createur.setGeometry(QtCore.QRect(490, 70, 441, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
