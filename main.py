@@ -25,7 +25,10 @@ import bibliotheque
 import abonnement_inter
 from emprunt_inter import *
 from fenetreabonnement import *
+from fenetrelivre import *
 from fenetreemprunt import *
+from fenetrejeux import *
+from fenetrefilm import *
 from livre_inter import *
 from jeux_inter import *
 from film_inter import *
@@ -188,26 +191,45 @@ class fenetreBibliotheque(QtWidgets.QMainWindow, bibliotheque.Ui_Bibliothequeceg
 
 
 
-        # Bouton Afficher listview
+    # Bouton Afficher listview
     @pyqtSlot()
-    def on_pushButton_ajouter_emprunt_clicked(self,dialog):
+    def on_pushButton_ajouter_emprunt_clicked(self):
         # Instancier une boite de dialogue FenetreListview
         emprunt = Fenetreemprunt()
         # Préparer la listview
-        model = QStandardItemModel()
-        dialog.listView_abonnement.setModel(model)
-        for e in ls_abonner:
-            item = QStandardItem(
-                e.code_abbonnement + " * " + e.type_abbonnement + " * " + e.prix + " * " + e.duree + " * " + e.date + " * " + e.nom + " * " + e.courriel_tele)
-            model.appendRow(item)
-        emprunt.listView_emprunt.setModel(model)
-        for e in ls_emprunt:
-            item = QStandardItem(
-               e.code_emprunt + " * " + e.date_emprunt + " * " + e.list+ " * " + e.abonner)
-            model.appendRow(item)
-            # Afficher la boite de dialogue
+        # Afficher la boite de dialogue
         emprunt.show()
         reply = emprunt.exec_()
+
+      # Bouton Afficher listview
+    @pyqtSlot()
+    def on_pushButton_ajouter_doc_clicked(self):
+        # Instancier une boite de dialogue FenetreListview
+        jeux = Fenetrejeux()
+        # Préparer la listview
+        # Afficher la boite de dialogue
+        jeux.show()
+        reply = jeux.exec_()
+
+    # Bouton Afficher listview
+    @pyqtSlot()
+    def on_pushButton_ajouter_livre_clicked(self):
+        # Instancier une boite de dialogue FenetreListview
+        livre = Fenetrelivre()
+        # Préparer la listview
+        # Afficher la boite de dialogue
+        livre.show()
+        reply = livre.exec_()
+
+    # Bouton Afficher listview
+    @pyqtSlot()
+    def on_pushButton_ajouter_film_clicked(self):
+        # Instancier une boite de dialogue FenetreListview
+        film = Fenetrefilm()
+        # Préparer la listview
+        # Afficher la boite de dialogue
+        film.show()
+        reply = film.exec_()
 
 
 #################################

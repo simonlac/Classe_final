@@ -52,7 +52,7 @@
      <string>Ajouter un jeux</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_ajouter_abonner">
+   <widget class="QPushButton" name="pushButton_ajouter_livre">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -70,7 +70,7 @@
      <string>Ajouter un livre</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_ajouter_doc_3">
+   <widget class="QPushButton" name="pushButton_ajouter_film">
     <property name="geometry">
      <rect>
       <x>480</x>

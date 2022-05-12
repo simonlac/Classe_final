@@ -6,21 +6,20 @@ from PyQt5.QtCore import pyqtSlot
 # Importer la boite de dialogue
 
 
-import emprunt_inter
+import film_inter
 
 
 ######################################################
 ###### DÉFINITIONS DE LA CLASSE Fenetrelistview ######
 ######################################################
 
-class Fenetreemprunt(QtWidgets.QDialog, emprunt_inter.Ui_emprunt):
+class Fenetrefilm(QtWidgets.QDialog, film_inter.Ui_film):
     def __init__(self, parent=None):
-        super(Fenetreemprunt, self).__init__(parent)
+        super(Fenetrefilm, self).__init__(parent)
         self.setupUi(self)
-        self.setWindowTitle("Liste des emprunts")
+        self.setWindowTitle("Liste des film")
 
 
     @pyqtSlot()
-    def on_pushButton_quitter_emprunt_clicked(self):
+    def on_pushButton_quitter_film_clicked(self):
         self.close()
-
