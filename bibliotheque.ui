@@ -7,23 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextBrowser" name="textBrowser_lst_doc">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>250</y>
-      <width>231</width>
-      <height>291</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="lbl_biblio">
     <property name="geometry">
      <rect>
@@ -154,23 +144,33 @@
      <string>Emprunt</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser_lst_abonnement">
+   <widget class="QListView" name="listView_abonnement">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>70</x>
       <y>250</y>
       <width>231</width>
-      <height>291</height>
+      <height>301</height>
      </rect>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser_lst_emprunt">
+   <widget class="QListView" name="listView_document">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>550</x>
       <y>250</y>
       <width>231</width>
-      <height>291</height>
+      <height>301</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListView" name="listView_emprunt">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>250</y>
+      <width>231</width>
+      <height>301</height>
      </rect>
     </property>
    </widget>

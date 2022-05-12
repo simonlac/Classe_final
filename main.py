@@ -8,16 +8,6 @@
 ####################################################################################
 
 
-####################################################################################
-###  420-2G2 - Programmation orientée objet
-###  Travail: Exercice 1 - Interface graphique
-###  Nom: Hasna Hocini
-###  No étudiant: 123456
-###  No Groupe:
-###  Description du fichier: Programme principal
-####################################################################################
-
-
 #######################################
 ###  IMPORTATIONS - Portée globale  ###
 ########+###############################
@@ -25,15 +15,17 @@
 # Importer le module sys nécessaire à l'exécution.
 import sys
 # Pour la réinitialisation de la date dans le dateEdit
-from PyQt5.QtCore import QDate
+from PyQt5.QtCore import QDate, pyqtSlot
 
 # Importer Pour le model de la listView
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
 # importer les interfaces graphiques
 import bibliotheque
-from abonnement_inter import *
+import abonnement_inter
 from emprunt_inter import *
+from fenetreabonnement import *
+from fenetreemprunt import *
 from livre_inter import *
 from jeux_inter import *
 from film_inter import *
@@ -59,11 +51,13 @@ ls_livre = []
 ls_jeux = []
 ls_film = []
 
+
+
 #######################################
 ###### DÉFINITIONS DES FONCTIONS ######
 #######################################
-#code document
-def verifier_livre_liste(p_code_de_document):
+# code document
+def verifier_document_liste(p_code_de_document):
     """
          Vérifie si le code de document existe dans la liste des document
              :param p_code_de_document:  le code de document
@@ -73,19 +67,23 @@ def verifier_livre_liste(p_code_de_document):
         if elt.code_document == p_code_de_document.capitalize():
             return True
     return False
+
+
 # code abonnement
-def verifier_abonner(p_code_abbonnement):
+def verifier_abonner_liste(p_code_abbonnement):
     """
-         Vérifie si l'abonner existe dans la liste des abonner
-             :param p_code-abonnement:  le numéro de l,abonner
-             :return: True si l'abonner est trouvé dans la liste des abonner et False sinon
+         Vérifie si le code de l'abonner existe dans la liste des document
+             :param p_code_abonnement:  le code de l'abonner
+             :return: True si le code de l'abonner est trouvé dans la liste des abonners et False sinon
     """
     for elt in ls_abonner:
-        if elt.code_abbonnement == p_code_abbonnement.capitalize():
+        if elt.p_code_abbonnement == p_code_abbonnement.capitalize():
             return True
     return False
+
+
 # code emprunt
-def verifier_emprunt(p_code_emprunt ):
+def verifier_emprunt(p_code_emprunt):
     """
          Vérifie si le code d'emprunt existe dans la liste des emprunts
              :param p_code-emprunt:  le numéro de l'emprunt
@@ -95,6 +93,7 @@ def verifier_emprunt(p_code_emprunt ):
         if elt.code_emprunt == p_code_emprunt.capitalize():
             return True
     return False
+
 
 def cacher_labels_erreur_abonner(objet):
     """
@@ -107,6 +106,7 @@ def cacher_labels_erreur_abonner(objet):
     objet.label_erreur_abonnement.setVisible(False)
     objet.label_erreur_code_inv_cour_tele.setVisible(False)
 
+
 def cacher_labels_erreur_emprunt(objet):
     """
     Cacher les différents labels d'erreur emprunt
@@ -116,6 +116,7 @@ def cacher_labels_erreur_emprunt(objet):
     objet.label_erreur_code_inv_document_emprunt.setVisible(False)
     objet.label_erreur_code_inv_abonnement_emprunt.setVisible(False)
     objet.label_erreur_emprunt.setVisible(False)
+
 
 def cacher_labels_erreur_film(objet):
     """
@@ -128,6 +129,7 @@ def cacher_labels_erreur_film(objet):
     objet.label_erreur_annee.setVisible(False)
     objet.label_erreur_realisateur.setVisible(False)
 
+
 def cacher_labels_erreur_jeux(objet):
     """
     Cacher les différents labels d'erreur de jeux
@@ -137,6 +139,7 @@ def cacher_labels_erreur_jeux(objet):
     objet.label_erreur_nb_rangee_jeux.setVisible(False)
     objet.label_erreur_createur.setVisible(False)
     objet.label_erreur_nb_joueur.setVisible(False)
+
 
 def cacher_labels_erreur_livre(objet):
     """
@@ -174,7 +177,37 @@ class fenetreBibliotheque(QtWidgets.QMainWindow, bibliotheque.Ui_Bibliothequeceg
         # Donner un titre à la fenêtre principale
         self.setWindowTitle("Bibliothèque du cegep de l'outaouais")
 
+    # Bouton Afficher listview
+    @pyqtSlot()
+    def on_pushButton_ajouter_abonner__clicked(self):
+        # Instancier une boite de dialogue FenetreListview
+        dialog = Fenetreabonnement()
+        # Afficher la boite de dialogue
+        dialog.show()
+        reply = dialog.exec_()
 
+
+
+        # Bouton Afficher listview
+    @pyqtSlot()
+    def on_pushButton_ajouter_emprunt_clicked(self,dialog):
+        # Instancier une boite de dialogue FenetreListview
+        emprunt = Fenetreemprunt()
+        # Préparer la listview
+        model = QStandardItemModel()
+        dialog.listView_abonnement.setModel(model)
+        for e in ls_abonner:
+            item = QStandardItem(
+                e.code_abbonnement + " * " + e.type_abbonnement + " * " + e.prix + " * " + e.duree + " * " + e.date + " * " + e.nom + " * " + e.courriel_tele)
+            model.appendRow(item)
+        emprunt.listView_emprunt.setModel(model)
+        for e in ls_emprunt:
+            item = QStandardItem(
+               e.code_emprunt + " * " + e.date_emprunt + " * " + e.list+ " * " + e.abonner)
+            model.appendRow(item)
+            # Afficher la boite de dialogue
+        emprunt.show()
+        reply = emprunt.exec_()
 
 
 #################################
@@ -196,6 +229,7 @@ def main():
     form.show()
     # Lancer l'application
     app.exec()
+
 
 if __name__ == "__main__":
     main()
