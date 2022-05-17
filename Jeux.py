@@ -79,7 +79,7 @@ class Jeux(Document):
          """
          chaine_jeux = " " * 60 + "\n" + "*" * 60 + "\n\n" + "   Le code du document : " + self.code_document + "\n" + \
                        "   Le titre du jeux : " + self.titre + "\n" + \
-                       "   Le nombre de la rangée : " + str(self.nb_de_rangee) + "\n" + \
+                       "   Le nombre de la rangée : " + str(self.Nb_de_rangee) + "\n" + \
                        "   Le créateur du jeux : " + self.createur + "\n" + \
                        "   Le nombre de joueur : " + str(self.nb_de_joueur) + "\n" + \
                        "   Le type de jeu: " + self.type + "\n" + \

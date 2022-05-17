@@ -342,16 +342,6 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;créateur invalide.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QListView" name="listView_jeux">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>400</y>
-     <width>451</width>
-     <height>161</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="lineEdit_jeux">
    <property name="geometry">
     <rect>
@@ -467,6 +457,16 @@
    </property>
    <property name="text">
     <string>nombre de joueur</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser_jeux">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>400</y>
+     <width>441</width>
+     <height>161</height>
+    </rect>
    </property>
   </widget>
  </widget>

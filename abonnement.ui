@@ -249,7 +249,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Date d'abonnement</string>
+    <string>Année d'abonnement</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_cour_tele">
@@ -359,16 +359,6 @@
     <string>code d'abonnement</string>
    </property>
   </widget>
-  <widget class="QDateEdit" name="Date_abonnement">
-   <property name="geometry">
-    <rect>
-     <x>500</x>
-     <y>140</y>
-     <width>301</width>
-     <height>81</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_erreur_nom">
    <property name="geometry">
     <rect>
@@ -401,16 +391,6 @@
      <pointsize>12</pointsize>
      <italic>true</italic>
     </font>
-   </property>
-  </widget>
-  <widget class="QListView" name="listView_lst_abonnement">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>390</y>
-     <width>451</width>
-     <height>161</height>
-    </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_supprimer_abonnement">
@@ -449,17 +429,17 @@
    </property>
    <item>
     <property name="text">
-     <string>6 mois</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
      <string>1 an</string>
     </property>
    </item>
    <item>
     <property name="text">
      <string>2 ans</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>4 ans</string>
     </property>
    </item>
   </widget>
@@ -495,6 +475,32 @@
    </property>
    <property name="text">
     <string>Quitter</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_annee_abo">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>150</y>
+     <width>291</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser_abonner">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>390</y>
+     <width>441</width>
+     <height>161</height>
+    </rect>
    </property>
   </widget>
  </widget>

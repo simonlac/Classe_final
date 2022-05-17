@@ -13,16 +13,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QListView" name="listView_film">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>400</y>
-     <width>451</width>
-     <height>161</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_suppriemer_film">
    <property name="geometry">
     <rect>
@@ -474,6 +464,39 @@
      <pointsize>12</pointsize>
      <italic>true</italic>
     </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_erreur_film_t_inv">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>330</y>
+     <width>361</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;le titre est invalide.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser_film">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>400</y>
+     <width>441</width>
+     <height>161</height>
+    </rect>
    </property>
   </widget>
  </widget>

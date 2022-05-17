@@ -118,11 +118,11 @@ class Abbonement:
         elif p_type_abbonnement == "deluxe":
             prix = 30.00
         total = prix
-        if p_duree == "6 mois":
+        if p_duree == "1 ans":
             total /2
-        elif p_duree == "1 ans":
-            total*1
         elif p_duree == "2 ans":
+            total*1
+        elif p_duree == "4 ans":
             total*2
         return total
 
@@ -135,7 +135,7 @@ class Abbonement:
                       "   Le type d'abbonement : " + self.type_abbonnement + "\n" + \
                       "   Le prix : " + str(self.prix) + "\n" + \
                       "   La durée de l'abonnement: " + self.duree + "\n" + \
-                      "   Le date du début de l'abbonement: " + self.date + "\n" + \
+                      "   Le date du début de l'abbonement: " + str(self.date) + "\n" + \
                       "   Le nom de  l'abboner: " + self.nom + "\n" + \
                       "   Le courriel ou téléphone de l'abonner: " + self.courriel_tele + "\n" + \
                       "\n" + "*" * 60
