@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>599</height>
+    <height>593</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -144,33 +144,33 @@
      <string>Emprunt</string>
     </property>
    </widget>
-   <widget class="QListView" name="listView_abonnement">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>250</y>
-      <width>231</width>
-      <height>301</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QListView" name="listView_document">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>250</y>
-      <width>231</width>
-      <height>301</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QListView" name="listView_emprunt">
+   <widget class="QTextBrowser" name="textBrowser_emprunt">
     <property name="geometry">
      <rect>
       <x>310</x>
       <y>250</y>
       <width>231</width>
       <height>301</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser_abonnement_lst">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>251</y>
+      <width>231</width>
+      <height>301</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser_doc_lst">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>250</y>
+      <width>231</width>
+      <height>291</height>
      </rect>
     </property>
    </widget>

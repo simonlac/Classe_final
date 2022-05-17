@@ -70,7 +70,7 @@ class Film(Document):
         mutateur de __acteur_prin
         """
         if len(p_acteur_principal) <= 100:
-            self.__auteur = p_acteur_principal
+            self.__acteur_principal = p_acteur_principal
 
     acteur_principal = property(_get_acteur_prin, _set_acteur_prin)
 
@@ -87,7 +87,7 @@ class Film(Document):
         mutateur de __realisateur
         """
         if len(p_realisateur) <= 100:
-            self.__auteur = p_realisateur
+            self.__realisateur = p_realisateur
 
     realisateur = property(_get_realisateur, _set_realisateur)
 

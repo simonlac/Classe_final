@@ -29,16 +29,6 @@
     </font>
    </property>
   </widget>
-  <widget class="QListView" name="listView_document">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>380</y>
-     <width>221</width>
-     <height>171</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_erreur_code_inv_document_emprunt">
    <property name="enabled">
     <bool>true</bool>
@@ -82,16 +72,6 @@
    </property>
    <property name="text">
     <string>Date d'emprunt</string>
-   </property>
-  </widget>
-  <widget class="QListView" name="listView_abonnement">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>380</y>
-     <width>221</width>
-     <height>171</height>
-    </rect>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_code_emprunt">
@@ -174,16 +154,6 @@
      <pointsize>12</pointsize>
      <italic>true</italic>
     </font>
-   </property>
-  </widget>
-  <widget class="QListView" name="listView_emprunt">
-   <property name="geometry">
-    <rect>
-     <x>520</x>
-     <y>380</y>
-     <width>221</width>
-     <height>171</height>
-    </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_quitter_emprunt">
@@ -389,6 +359,36 @@
    </property>
    <property name="text">
     <string>code document</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser_emprunt">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>380</y>
+     <width>221</width>
+     <height>171</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser_lst_document">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>380</y>
+     <width>221</width>
+     <height>171</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser_lst_abonner">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>380</y>
+     <width>231</width>
+     <height>171</height>
+    </rect>
    </property>
   </widget>
  </widget>

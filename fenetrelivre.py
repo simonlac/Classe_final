@@ -83,7 +83,7 @@ class Fenetrelivre(QtWidgets.QDialog, livre_inter.Ui_livre):
         liv.auteur = self.lineEdit_auteur.text().capitalize()
         liv.annee_publication = int(self.lineEdit.text())
         liv.maison_edition = self.lineEdit_maison.text().capitalize()
-        # Booleen qui nous informe si le code du livre existe ou pas dans la liste des étudiants
+        # Booleen qui nous informe si le code du livre existe ou pas dans la liste des livres
         verifier_livre = verifier_document_liste(liv.code_document)
 
         # Si le code du livre est valide mais existe déjà dans la liste des documents (on ne peut donc pas l'ajouter)
@@ -121,78 +121,9 @@ class Fenetrelivre(QtWidgets.QDialog, livre_inter.Ui_livre):
             ls_livre.append(liv)
             # Ajouter l'objet instancié à la liste des documents
             ls_document.append(liv)
-            # Ajouter les informations de l'étudiant entré au listview
+            # Ajouter les informations du livre entré au textbrowser
             self.textBrowser_livre.append(liv.__str__())
-            # Réinitialiser les lineEdits du titre, du nb de rangée, du code de document, de l'année de publication,
-            # de l'auteur et de la maison d'édition
-            self.lineEdit_code.clear()
-            self.lineEdit_titre.clear()
-            self.lineEdit_nb_rangee.clear()
-            self.lineEdit_auteur.clear()
-            self.lineEdit_maison.clear()
-            self.lineEdit.clear()
-
-    @pyqtSlot()
-    # Bouton Modifier
-    def on_pushButton_modifier_livre_clicked(self):
-        """
-        Gestionnaire d'évènement pour le bouton Modifier
-        """
-        # Instancier un objet Eudiant
-        liv = Livre()
-        # Entrée de donnée pour les attributs de l'objet Etudiant
-        liv.code_document = self.lineEdit_code.text().capitalize()
-        liv.titre = self.lineEdit_titre.text().capitalize()
-        liv.Nb_de_rangee = int(self.lineEdit_nb_rangee.text())
-        liv.auteur = self.lineEdit_auteur.text().capitalize()
-        liv.annee_publication = int(self.lineEdit.text())
-        liv.maison_edition = self.lineEdit_maison.text().capitalize()
-        # Booleen qui nous informe si le code du livre existe ou pas dans la liste des étudiants
-        verifier_livre = verifier_document_liste(liv.code_document)
-        # Si le numéro d'étudiant est valide mais existe déjà dans la liste des étudiants (on ne peut donc pas l'ajouter)
-        if verifier_livre is False and liv.code_document != "":
-            # Effacer le lineEdit du numéro étudiant et afficher le message d'erreur
-            # si le titre est invalide, afficher un message d'erreur
-            if liv.titre == "":
-                self.lineEdit_titre.clear()
-                self.label_erreur_livre_t_inv.setVisible(True)
-            # Si le code de document est invalide, effacer le lineEdit du code de document  et afficher un message d'erreur
-            if liv.code_document == "":
-                self.lineEdit_code.clear()
-                self.label_erreur_code_inv.setVisible(True)
-            # si le nombre de rangée est invalide, afficher un message d'erreur
-            if liv.Nb_de_rangee == "":
-                self.lineEdit_nb_rangee.clear()
-                self.label_erreur_nb_rangee.setVisible(True)
-            # Si l'auteur  est invalide, effacer le lineEdit du code de document  et afficher un message d'erreur
-            if liv.auteur == "":
-                self.lineEdit_auteur.clear()
-                self.label_erreur_auteur.setVisible(True)
-            # Si la date de publication est invalide, afficher un message d'erreur
-            if liv.annee_publication == "":
-                self.lineEdit.clear()
-                self.label_erreur_annee.setVisible(True)
-            # si la maison d'édition est invalide, afficher un message d'erreur
-            if liv.maison_edition == "":
-                self.lineEdit_maison.clear()
-                self.label_erreur_annee_2.setVisible(True)
-            # Si les informations entrées sont valides et l'étudiant n'existe pas dans la liste des étudiants
-            if liv.code_document != "" and liv.titre != "" and liv.Nb_de_rangee != "" and liv.auteur != "" and liv.annee_publication != "" and liv.maison_edition != "" and verifier_livre is True:
-                for lie in ls_livre:
-                    # Chercher dans la liste des étudiants un étudiant ayant le numéro d'étudiant entré
-                    if lie.code_document == self.lineEdit_code.text():
-                        # Apporter les modifications aux attributs Nom_Etud, Programme et Date_Naiss
-                        lie.titre = self.lineEdit_titre.text().capitalize()
-                        lie.Nb_de_rangee = int(self.lineEdit_nb_rangee.text())
-                        lie.auteur = self.lineEdit_auteur.text().capitalize()
-                        lie.annee_publication = int(self.lineEdit.text())
-                        lie.maison_edition = self.lineEdit_maison.text().capitalize()
-            # Effacer le textBowser
-            self.textBrowser_livre.clear()
-            # Après modifications, réfficher tous les étudiants de la liste dans le textBrowser
-            for lie in ls_livre:
-                self.textBrowser_livre.append(lie.__str__())
-            # Réinitialiser les lineEdits du numéro et du nom et le dateEdit
+            # Réinitialiser les lineEdits
             self.lineEdit_code.clear()
             self.lineEdit_titre.clear()
             self.lineEdit_nb_rangee.clear()
@@ -206,9 +137,9 @@ class Fenetrelivre(QtWidgets.QDialog, livre_inter.Ui_livre):
         """
         Gestionnaire d'évènement pour le bouton Supprimer
         """
-        # Instancier un objet Eudiant
+        # Instancier un objet livre
         liv = Livre()
-        # Entrée de donnée pour les attributs de l'objet Etudiant
+        # Entrée de donnée pour les attributs de l'objet
         liv.code_document = self.lineEdit_code.text().capitalize()
         liv.titre = self.lineEdit_titre.text().capitalize()
         liv.Nb_de_rangee = int(self.lineEdit_nb_rangee.text())

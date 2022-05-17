@@ -63,47 +63,46 @@ class Fenetreabonnement(QtWidgets.QDialog, abonnement_inter.Ui_Dialog):
         """
         Gestionnaire d'évènement pour le bouton Ajouter
         """
-        # Instancier un objet livre
+        # Instancier un objet abonnement
         abo = Abbonement()
-        # Entrée de donnée pour les attributs de l'objet Livre
+        # Entrée de donnée pour les attributs de l'objet abonnement
         abo.code_abbonnement = self.lineEdit_code_abonnement.text().capitalize()
         abo.type_abbonnement = self.comboBox_type_abonnement.currentText()
         abo.nom = self.lineEdit_nom.text().capitalize()
         abo.duree = self.comboBox_duree.currentText()
         abo.date = int(self.lineEdit_annee_abo.text())
         abo.courriel_tele = self.lineEdit_cour_tele.text().capitalize()
-        # Booleen qui nous informe si le code du livre existe ou pas dans la liste des étudiants
+        # Booleen qui nous informe si le code de l'abonnement existe ou pas dans la liste des abonnement
         verifier_abonner = verifier_abonner_liste(abo.code_abbonnement)
 
-        # Si le code du livre est valide mais existe déjà dans la liste des documents (on ne peut donc pas l'ajouter)
+        # Si le code de l'abonnement est valide mais existe déjà dans la liste  (on ne peut donc pas l'ajouter)
         if verifier_abonner is True:
-            # Effacer le lineEdit du code du document et afficher le message d'erreur
+            # Effacer le lineEdit du code de l'abonnement et afficher le message d'erreur
             self.lineEdit_code_abonnement.clear()
             self.label_erreur_code_abonnement.setVisible(True)
-        # Si le code de document est invalide, effacer le lineEdit du code de document  et afficher un message d'erreur
+        # Si le code de l'abonnement est invalide, effacer le lineEdit du code de l'abonnement  et afficher un message d'erreur
         if abo.code_abbonnement == "":
             self.lineEdit_code_abonnement.clear()
             self.label_erreur_code_inv_abonnement.setVisible(True)
-        # si le nombre de rangée est invalide, afficher un message d'erreur
+        # si le nom est invalide, afficher un message d'erreur
         if abo.nom == "":
             self.lineEdit_nom.clear()
             self.label_erreur_nom.setVisible(True)
-        # Si l'auteur  est invalide, effacer le lineEdit du code de document  et afficher un message d'erreur
+        # Si la date est invalide, effacer le lineEdit de la date et afficher un message d'erreur
         if abo.date == "":
             self.lineEdit_annee_abo.clear()
             self.label_erreur_abonnement.setVisible(True)
-        # si la maison d'édition est invalide, afficher un message d'erreur
+        # si le courriel ou télé est invalide, afficher un message d'erreur
         if abo.courriel_tele == "":
             self.lineEdit_cour_tele.clear()
             self.label_erreur_code_inv_cour_tele.setVisible(True)
-        # Si les informations entrées sont valides et le livre n'existe pas dans la liste des livres
+        # Si les informations entrées sont valides et l' abonnement n'existe pas dans la liste
         if abo.code_abbonnement != "" and abo.nom != "" and abo.date != "" and abo.courriel_tele != "" and verifier_abonner is False:
-            # Ajouter l'objet instancié à la liste des livre
+            # Ajouter l'objet instancié à la liste
             ls_abonner.append(abo)
-            # Ajouter les informations de l'étudiant entré au listview
+            # Ajouter les informations de l'abonnement au textbrowser
             self.textBrowser_abonner.append(abo.__str__())
-            # Réinitialiser les lineEdits du titre, du nb de rangée, du code de document, de l'année de publication,
-            # de l'auteur et de la maison d'édition
+            # Réinitialiser les lineEdits
             self.lineEdit_code_abonnement.clear()
             self.lineEdit_nom.clear()
             self.lineEdit_annee_abo.clear()

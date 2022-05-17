@@ -23,6 +23,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 # importer les interfaces graphiques
 import bibliotheque
 import abonnement_inter
+import fenetreabonnement
 from emprunt_inter import *
 from fenetreabonnement import *
 from fenetrelivre import *
@@ -54,46 +55,6 @@ ls_jeux = []
 ls_film = []
 ls_emprunt = []
 
-
-#######################################
-###### DÉFINITIONS DES FONCTIONS ######
-#######################################
-
-
-# code abonnement
-def verifier_abonner_liste(p_code_abbonnement):
-    """
-         Vérifie si le code de l'abonner existe dans la liste des document
-             :param p_code_abonnement:  le code de l'abonner
-             :return: True si le code de l'abonner est trouvé dans la liste des abonners et False sinon
-    """
-    for elt in ls_abonner:
-        if elt.p_code_abbonnement == p_code_abbonnement.capitalize():
-            return True
-    return False
-
-
-# code emprunt
-def verifier_emprunt(p_code_emprunt):
-    """
-         Vérifie si le code d'emprunt existe dans la liste des emprunts
-             :param p_code-emprunt:  le numéro de l'emprunt
-             :return: True si l'emprunt est trouvé dans la liste des emprunts et False sinon
-    """
-    for elt in ls_emprunt:
-        if elt.code_emprunt == p_code_emprunt.capitalize():
-            return True
-    return False
-
-def cacher_labels_erreur_emprunt(objet):
-    """
-    Cacher les différents labels d'erreur emprunt
-    """
-    objet.label_erreur_code_emprunt.setVisible(False)
-    objet.label_erreur_code_inv_emprunt.setVisible(False)
-    objet.label_erreur_code_inv_document_emprunt.setVisible(False)
-    objet.label_erreur_code_inv_abonnement_emprunt.setVisible(False)
-    objet.label_erreur_emprunt.setVisible(False)
 
 ########################################################
 ###### DÉFINITIONS DE LA CLASSE fenetrePrincipale ######

@@ -52,10 +52,10 @@ class Emprunt:
                 :return: Chaine à afficher
         """
         chaine_emprunt = " " * 60 + "\n" + "*" * 60 + "\n\n" + "   Le code de l'emprunt : " + self.code_emprunt + "\n" + \
-                      "   La date d'emprunt : " + self.date_emprunt + "\n" + \
                       "   La liste de détail: " + self.list + "\n" + \
                       "   L'abbonée: " + self.abonner + "\n" + \
-                      "\n" + "*" * 60
+                      "   La date de l'emprunt : " + str(self.date_emprunt.year()) + "-" \
+                      + str(self.date_emprunt.month()) + "-" + str(self.date_emprunt.day()) + "\n\n" + "*" * 60
         return chaine_emprunt
 
 

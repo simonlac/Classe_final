@@ -124,7 +124,7 @@ class Abbonement:
             total*1
         elif p_duree == "4 ans":
             total*2
-        return total
+        return prix
 
     def __str__(self):
         """
@@ -133,7 +133,6 @@ class Abbonement:
         """
         chaine_abbonnement = " " * 60 + "\n" + "*" * 60 + "\n\n" + "   Le code de l'abbonnement : " + self.code_abbonnement + "\n" + \
                       "   Le type d'abbonement : " + self.type_abbonnement + "\n" + \
-                      "   Le prix : " + str(self.prix) + "\n" + \
                       "   La durée de l'abonnement: " + self.duree + "\n" + \
                       "   Le date du début de l'abbonement: " + str(self.date) + "\n" + \
                       "   Le nom de  l'abboner: " + self.nom + "\n" + \

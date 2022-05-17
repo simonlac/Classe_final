@@ -70,18 +70,59 @@ class Fenetrefilm(QtWidgets.QDialog, film_inter.Ui_film):
         """
         Gestionnaire d'évènement pour le bouton Ajouter
         """
-        # Instancier un objet livre
+        # Instancier un objet film
         fil = Film()
-        # Entrée de donnée pour les attributs de l'objet Livre
+        # Entrée de donnée pour les attributs de l'objet film
         fil.code_document = self.lineEdit_code_film.text().capitalize()
-        print(fil.code_document)
         fil.titre = self.lineEdit_film.text().capitalize()
-        print(fil.titre)
         fil.Nb_de_rangee = int(self.lineEdit_nb_rangee_film.text())
-        print(fil.Nb_de_rangee)
         fil.genre = self.lineEdit_genre.text().capitalize()
-        print(fil.genre)
         fil.acteur_principal = self.lineEdit_acteur_prin.text().capitalize()
-        print(fil.acteur_principal)
         fil.realisateur = self.lineEdit_realisateur.text().capitalize()
-        print(fil.realisateur)
+        # Booleen qui nous informe si le code du film existe ou pas dans la liste
+        verifier_film = verifier_document_liste(fil.code_document)
+
+        # Si le code du film est valide mais existe déjà dans la liste des documents (on ne peut donc pas l'ajouter)
+        if verifier_film is True:
+            # Effacer le lineEdit du code du document et afficher le message d'erreur
+            self.lineEdit_code_film.clear()
+            self.label_erreur_code_film.setVisible(True)
+        # si le titre est invalide, afficher un message d'erreur
+        if fil.titre == "":
+            self.lineEdit_film.clear()
+            self.label_erreur_film_t_inv.setVisible(True)
+        # Si le code de document est invalide, effacer le lineEdit du code de document  et afficher un message d'erreur
+        if fil.code_document == "":
+            self.lineEdit_code_film.clear()
+            self.label_erreur_code_inv_film.setVisible(True)
+        # si le nombre de rangée est invalide, afficher un message d'erreur
+        if fil.Nb_de_rangee == "":
+            self.lineEdit_nb_rangee_film.clear()
+            self.label_erreur_nb_rangee_film.setVisible(True)
+        # Si le genre est invalide
+        if fil.genre == "":
+            self.lineEdit_genre.clear()
+            self.label_erreur_genre.setVisible(True)
+        # Si l'acteur principal est invalide
+        if fil.acteur_principal == "":
+            self.lineEdit_acteur_prin.clear()
+            self.label_erreur_annee.setVisible(True)
+        # si le réalisateur est invalide, afficher un message d'erreur
+        if fil.realisateur == "":
+            self.lineEdit_realisateur.clear()
+            self.label_erreur_realisateur.setVisible(True)
+        # Si les informations entrées sont valides et le film n'existe pas dans la liste 
+        if fil.code_document != "" and fil.titre != "" and fil.Nb_de_rangee != "" and fil.genre != "" and fil.acteur_principal != "" and fil.realisateur != "" and verifier_film is False:
+            # Ajouter l'objet instancié à la liste des film
+            ls_film.append(fil)
+            # Ajouter l'objet instancié à la liste des film
+            ls_document.append(fil)
+            # Ajouter les informations du livre entré au textbrowser
+            self.textBrowser_film.append(fil.__str__())
+            # Réinitialiser les lineEdits
+            self.lineEdit_code_film.clear()
+            self.lineEdit_film.clear()
+            self.lineEdit_nb_rangee_film.clear()
+            self.lineEdit_genre.clear()
+            self.lineEdit_acteur_prin.clear()
+            self.lineEdit_realisateur.clear()
