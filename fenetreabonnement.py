@@ -124,23 +124,23 @@ class Fenetreabonnement(QtWidgets.QDialog, abonnement_inter.Ui_Dialog):
         abonn.duree = self.comboBox_duree.currentText()
         abonn.date = int(self.lineEdit_annee_abo.text())
         abonn.courriel_tele = self.lineEdit_cour_tele.text().capitalize()
-        # Booleen qui nous informe si le numéro d'étudiant existe ou pas dans la liste des étudiants
+        # Booleen qui nous informe si le numéro d'abonner existe ou pas dans la liste des abonners
         verifier_abo = verifier_abonner_liste(abonn.code_abbonnement)
-        # Si le nom, le numéro et la date de naissance sont valides et l'étudiant existe dans la liste des étudiants:
+        # si toute les caractéristiques existe dans la liste des étudiants:
         if abonn.code_abbonnement != "" and abonn.nom != "" and abonn.date != "" and abonn.courriel_tele != "" and verifier_abo is True:
             trouve = False
             for abon in ls_abonner:
-                # # Chercher dans la liste des étudiants un étudiant ayant les informations entrées
+                # # Chercher dans la liste des abonners un abonnement ayant les informations entrées
                 if abon.date == self.lineEdit_annee_abo.text() and abon.nom == self.lineEdit_nom.text().capitalize() \
                         and abon.type_abonnement == self.comboBox_type_abonnement.currentText() \
                         and abon.duree == self.comboBox_duree.currentText() \
                         and abon.code_abbonnement == self.lineEdit_code_abonnement.text().capitalize() \
                         and abon.courriel_tele == self.lineEdit_cour_tele.text().capitalize():
-                    # Supprimer l'étudiant de la liste des étudiants
+                    # Supprimer l'abonner de la liste
                     trouve = True
                     ls_abonner.remove(abon)
                     break
-            # Si l'étudiant n'existe pas dans la liste afficher un message d'erreur dans le label_erreur_Etu_Inexistant
+            # Si l'abonner n'existe pas dans la liste afficher un message d'erreur
             if not trouve:
                 self.label_erreur_code_inv_abonnement.setVisible(True)
             else:
@@ -148,14 +148,14 @@ class Fenetreabonnement(QtWidgets.QDialog, abonnement_inter.Ui_Dialog):
                 self.textBrowser_abonner.clear()
                 for elt in ls_abonner:
                     self.textBrowser_abonnerr.append(elt.__str__())
-                # Réinitialiser les lineEdit et le dateEdit
+                # Réinitialiser les lineEdit
                 self.lineEdit_code_abonnement.clear()
                 self.lineEdit_nom.clear()
                 self.lineEdit_annee_abo.clear()
                 self.lineEdit_cour_tele.clear()
-                # Si le numéro d'étudiant est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
+                # Si le code d'abonnement est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
         if verifier_abo is False and abonn.code_abbonnement != "":
-            # Effacer le lineEdit du numéro étudiant et afficher le message d'erreur
+            # Effacer le lineEdit du code d'abonner et afficher le message d'erreur
             self.lineEdit_numero.clear()
             self.label_erreur_Etu_Inexistant.setVisible(True)
         # si le nom est invalide, afficher un message d'erreur

@@ -139,39 +139,39 @@ class Fenetrelivre(QtWidgets.QDialog, livre_inter.Ui_livre):
         """
         # Instancier un objet livre
         liv = Livre()
-        # Entrée de donnée pour les attributs de l'objet
+        # Entrée de donnée pour les attributs de l'objet livre
         liv.code_document = self.lineEdit_code.text().capitalize()
         liv.titre = self.lineEdit_titre.text().capitalize()
         liv.Nb_de_rangee = int(self.lineEdit_nb_rangee.text())
         liv.auteur = self.lineEdit_auteur.text().capitalize()
         liv.annee_publication = int(self.lineEdit.text())
         liv.maison_edition = self.lineEdit_maison.text().capitalize()
-        # Booleen qui nous informe si le code du livre existe ou pas dans la liste des étudiants
+        # Booleen qui nous informe si le code du livre existe ou pas dans la liste
         verifier_livre = verifier_document_liste(liv.code_document)
-        # Si le nom, le numéro et la date de naissance sont valides et l'étudiant existe dans la liste des étudiants:
+        # si les caractéristiques du livre existe dans la liste :
         if liv.code_document != "" and liv.titre != "" and liv.Nb_de_rangee != "" and liv.auteur != "" and liv.annee_publication != "" and liv.maison_edition != "" and verifier_livre is True:
             trouve = False
             for liv in ls_livre:
-                # # Chercher dans la liste des étudiants un étudiant ayant les informations entrées
+                # # Chercher dans la liste des documents un livre ayant les informations entrées
                 if liv.code_document == self.lineEdit_code.text() and liv.titre == self.lineEdit_titre.text().capitalize() \
                         and liv.Nb_de_rangee == int(self.lineEdit_nb_rangee.text()) \
                         and liv.auteur == self.lineEdit_auteur.text().capitalize() \
                         and liv.annee_publication == int(self.lineEdit.text()) \
                         and liv.maison_edition == self.lineEdit_maison.text().capitalize():
-                    # Supprimer l'étudiant de la liste des étudiants
+                    # Supprimer le livre de la liste
                     trouve = True
                     ls_livre.remove(liv)
                     ls_document.remove(liv)
                     break
-            # Si l'étudiant n'existe pas dans la liste afficher un message d'erreur dans le label_erreur_Etu_Inexistant
+            # Si le livre n'existe pas dans la liste afficher un message d'erreur
             if not trouve:
                 self.label_erreur_code_inv.setVisible(True)
             else:
-                # Réafficher dans le textBrowser la nouvelle liste qui ne contient pas l'étudiant supprimé
+                # Réafficher dans le textBrowser la nouvelle liste qui ne contient pas le livre supprimé
                 self.textBrowser_livre.clear()
                 for liv in ls_livre:
                     self.textBrowser_livre.append(liv.__str__())
-                # Réinitialiser les lineEdit et le dateEdit
+                # Réinitialiser les lineEdit
                 self.lineEdit_code.clear()
                 self.lineEdit_titre.clear()
                 self.lineEdit_nb_rangee.clear()
@@ -179,7 +179,7 @@ class Fenetrelivre(QtWidgets.QDialog, livre_inter.Ui_livre):
                 self.lineEdit_maison.clear()
                 self.lineEdit.clear()
 
-                # Si le numéro d'étudiant est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
+                # Si le code de document est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
         if verifier_livre is False and liv.code_document != "":
             if liv.titre == "":
                 self.lineEdit_titre.clear()

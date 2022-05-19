@@ -107,54 +107,54 @@ class Fenetreemprunt(QtWidgets.QDialog, emprunt_inter.Ui_emprunt):
         """
         Gestionnaire d'évènement pour le bouton Supprimer
         """
-        # Instancier un objet Eudiant
+        # Instancier un emprunt
         emp = Emprunt()
-        # Entrée de donnée pour les attributs de l'objet Etudiant
+        # Entrée de donnée pour les attributs de l'objet emprunt
         emp.code_emprunt = self.lineEdit_code_emprunt.text().capitalize()
         emp.list = self.lineEdit_code_document_emprunt.text().capitalize()
         emp.date_emprunt = self.Date_emprunt.date()
         emp.abonner = self.lineEdit_code_abonnement_emprunt.text().capitalize()
-        # Booleen qui nous informe si le numéro d'étudiant existe ou pas dans la liste des étudiants
+        # Booleen qui nous informe si l'emprunt existe ou pas dans la liste
         verifier_emprun = verifier_emprunt(emp.code_emprunt)
-        # Si le nom, le numéro et la date de naissance sont valides et l'étudiant existe dans la liste des étudiants:
+        # les caractéristiques de l'emprunt existe dans la liste :
         if emp.code_emprunt != "" and emp.list != "" and emp.date_emprunt != ""and emp.abonner != "" and verifier_emprun is True:
             trouve = False
             for emprunt in ls_emprunt:
-                # # Chercher dans la liste des étudiants un étudiant ayant les informations entrées
+                # # Chercher dans la liste des emprunt un emprunt ayant les informations entrées
                 if emprunt.code_emprunt == self.lineEdit_code_emprunt.text().capitalize() and emprunt.abonner == self.lineEdit_code_abonnement_emprunt.text().capitalize() \
                         and emprunt.list == self.lineEdit_code_document_emprunt.text().capitalize() \
                         and emprunt.date_emprunt == self.Date_emprunt.date():
-                    # Supprimer l'étudiant de la liste des étudiants
+                    # Supprimer l'emprunt de la liste
                     trouve = True
                     ls_emprunt.remove(emprunt)
                     break
-            # Si l'étudiant n'existe pas dans la liste afficher un message d'erreur dans le label_erreur_Etu_Inexistant
+            # Si l'emprunt n'existe pas dans la liste afficher un message d'erreur
             if not trouve:
                 self.label_erreur_code_inv_emprunt.setVisible(True)
             else:
-                # Réafficher dans le textBrowser la nouvelle liste qui ne contient pas l'étudiant supprimé
+                # Réafficher dans le textBrowser la nouvelle liste qui ne contient pas l'emprunt supprimé
                 self.textBrowser_emprunt.clear()
                 for emprunt in ls_emprunt:
                  self.textBrowser_emprunt.append(emprunt.__str__())
-                # Réinitialiser les lineEdit et le dateEdit
+                # Réinitialiser les lineEdit
                 self.lineEdit_code_emprunt.clear()
                 self.lineEdit_code_abonnement_emprunt.clear()
                 self.Date_emprunt.setDate(QDate(2000, 1, 1))
                 self.lineEdit_code_document_emprunt.clear()
-                # Si le numéro d'étudiant est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
+                # Si le code d'emprunt est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
         if verifier_emprun is False and emp.code_emprunt != "":
-            # Effacer le lineEdit du numéro étudiant et afficher le message d'erreur
+            # Effacer le lineEdit du numéro d'emprunt et afficher le message d'erreur
             self.lineEdit_code_emprunt.clear()
             self.label_erreur_code_emprunt.setVisible(True)
-        # si le nom est invalide, afficher un message d'erreur
+        # si le code d'abonner est invalide, afficher un message d'erreur
         if emp.abonner == "":
             self.lineEdit_code_abonnement_emprunt.clear()
             self.label_erreur_code_inv_abonnement_emprunt.setVisible(True)
-        # Si le numéro d'étudiant est invalide, effacer le lineEdit du numéro étudiant  et afficher un message d'erreur
+        # Si le numéro de document est invalide, afficher un message d'erreur
         if emp.list == "":
             self.lineEdit_code_document_emprunt.clear()
             self.label_erreur_code_inv_document_emprunt.setVisible(True)
-            # Si la date de naissance est invalide, afficher un message d'erreur
+            # Si la date d'emprunt est invalide, afficher un message d'erreur
         if emp.date_emprunt == "":
             self.label_erreur_emprunt.setVisible(True)
 

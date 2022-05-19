@@ -3,7 +3,7 @@
 ###  Travail: Examen Certificatif
 ###  Nom: Simon Lacaille
 ###  Numéro étudiant: 2129107
-###  Description du fichier: fenêtre film
+###  Description du fichier: fenêtre jeux
 ###  Travail basé sur l'exercice_Interface_graphique_Propriété de Hasna Hocini surtout méthode d'annotation
 ####################################################################################
 # Importer la librairie QtWidgets de QtDesigner.
@@ -125,48 +125,48 @@ class Fenetrejeux(QtWidgets.QDialog, jeux_inter.Ui_jeux):
         """
         Gestionnaire d'évènement pour le bouton Supprimer
         """
-        # Instancier un objet Eudiant
+        # Instancier un objet jeux
         global jeu
         je = Jeux()
-        # Entrée de donnée pour les attributs de l'objet Etudiant
+        # Entrée de donnée pour les attributs de l'objet jeux
         je.code_document = self.lineEdit_code_jeux.text().capitalize()
         je.titre = self.lineEdit_jeux.text().capitalize()
         je.Nb_de_rangee = int(self.lineEdit_nb_rangee_jeux.text())
         je.createur = self.lineEdit_createur.text().capitalize()
         je.nb_de_joueur = int(self.lineEdit_nb_joueur.text())
         je.type = self.comboBox_jeu.currentText()
-        # Booleen qui nous informe si le numéro d'étudiant existe ou pas dans la liste des étudiants
+        # Booleen qui nous informe si le jeux existe ou pas dans la liste
         verifier_je = verifier_document_liste(je.code_document)
-        # Si le nom, le numéro et la date de naissance sont valides et l'étudiant existe dans la liste des étudiants:
+        # Si les caractéristiques du jeux existe dans la liste :
         if je.code_document != "" and je.titre != "" and je.Nb_de_rangee != "" and je.createur != "" and je.nb_de_joueur != "" and verifier_je is True:
             trouve = False
             for jeu in ls_jeux and ls_jeux:
-                # # Chercher dans la liste des étudiants un étudiant ayant les informations entrées
+                # # Chercher dans la liste un jeu ayant les informations entrées
                 if jeu.code_document == self.lineEdit_code_jeux.text().capitalize() and jeu.titre == self.lineEdit_jeux.text().capitalize() \
                         and jeu.Nb_de_rangee == self.lineEdit_nb_rangee_jeux.text() \
                         and jeu.createur == self.lineEdit_createur.text().capitalize() \
                         and jeu.nb_de_joueur == self.lineEdit_nb_joueur.text().capitalize() \
                         and jeu.type == self.comboBox_jeu.currentText():
-                    # Supprimer l'étudiant de la liste des étudiants
+                    # Supprimer le jeu de la liste
                     trouve = True
                     ls_jeux.remove(jeu)
                     ls_jeux.remove(jeu)
                     break
-            # Si l'étudiant n'existe pas dans la liste afficher un message d'erreur dans le label_erreur_Etu_Inexistant
+            # Si le jeu n'existe pas dans la liste afficher un message d'erreur
             if not trouve:
                 self.label_erreur_code_inv_jeux.setVisible(True)
             else:
-                # Réafficher dans le textBrowser la nouvelle liste qui ne contient pas l'étudiant supprimé
+                # Réafficher dans le textBrowser la nouvelle liste qui ne contient pas le jeu supprimé
                 self.textBrowser_jeux.clear()
                 for fi in ls_film:
                     self.textBrowser_jeux.append(fi.__str__())
-                # Réinitialiser les lineEdit et le dateEdit
+                # Réinitialiser les lineEdit
                 self.lineEdit_code_jeux.clear()
                 self.lineEdit_jeux.clear()
                 self.lineEdit_nb_rangee_jeux.clear()
                 self.lineEdit_createur.clear()
                 self.lineEdit_nb_joueur.clear()
-                # Si le numéro d'étudiant est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
+                # Si le code du jeu est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
         if verifier_je is False and jeu.code_document !="":
             # Effacer le lineEdit du code du document et afficher le message d'erreur
             self.lineEdit_code_jeux.clear()
