@@ -17,7 +17,6 @@ import film_inter
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import pyqtSlot
 
-
 ######################################################
 ###### DÉFINITIONS DE LA CLASSE Fenetrelistview ######
 ######################################################
@@ -126,3 +125,81 @@ class Fenetrefilm(QtWidgets.QDialog, film_inter.Ui_film):
             self.lineEdit_genre.clear()
             self.lineEdit_acteur_prin.clear()
             self.lineEdit_realisateur.clear()
+
+    @pyqtSlot()
+    # Bouton Supprimer
+    def on_pushButton_suppriemer_film_clicked(self):
+        """
+        Gestionnaire d'évènement pour le bouton Supprimer
+        """
+        # Instancier un objet Eudiant
+        fil = Film()
+        # Entrée de donnée pour les attributs de l'objet Etudiant
+        fil.code_document = self.lineEdit_code_film.text().capitalize()
+        fil.titre = self.lineEdit_film.text().capitalize()
+        fil.Nb_de_rangee = int(self.lineEdit_nb_rangee_film.text())
+        fil.genre = self.lineEdit_genre.text().capitalize()
+        fil.acteur_principal = self.lineEdit_acteur_prin.text().capitalize()
+        fil.realisateur = self.lineEdit_realisateur.text().capitalize()
+        # Booleen qui nous informe si le numéro d'étudiant existe ou pas dans la liste des étudiants
+        verifier_fil = verifier_document_liste(fil.code_document)
+        # Si le nom, le numéro et la date de naissance sont valides et l'étudiant existe dans la liste des étudiants:
+        if fil.code_document != "" and fil.titre != "" and fil.Nb_de_rangee != "" and fil.genre != "" and fil.acteur_principal != "" and fil.realisateur != "" and verifier_fil is True:
+            trouve = False
+            for film in ls_film and ls_document:
+                # # Chercher dans la liste des étudiants un étudiant ayant les informations entrées
+                if film.code_document == self.lineEdit_code_film.text().capitalize() and film.titre == self.lineEdit_film.text().capitalize() \
+                        and film.Nb_de_rangee == self.lineEdit_nb_rangee_film.text() \
+                        and film.genre == self.lineEdit_genre.text().capitalize() \
+                        and film.acteur_principal == self.lineEdit_acteur_prin.text().capitalize() \
+                        and film.realisateur == self.lineEdit_realisateur.text().capitalize():
+                    # Supprimer l'étudiant de la liste des étudiants
+                    trouve = True
+                    ls_film.remove(film)
+                    ls_document.remove(film)
+                    break
+            # Si l'étudiant n'existe pas dans la liste afficher un message d'erreur dans le label_erreur_Etu_Inexistant
+            if not trouve:
+                self.label_erreur_code_inv_film.setVisible(True)
+            else:
+                # Réafficher dans le textBrowser la nouvelle liste qui ne contient pas l'étudiant supprimé
+                self.textBrowser_film.clear()
+                for fi in ls_film:
+                    self.textBrowser_film.append(fi.__str__())
+                # Réinitialiser les lineEdit et le dateEdit
+                self.lineEdit_code_film.clear()
+                self.lineEdit_film.clear()
+                self.lineEdit_nb_rangee_film.clear()
+                self.lineEdit_genre.clear()
+                self.lineEdit_acteur_prin.clear()
+                self.lineEdit_realisateur.clear()
+                # Si le numéro d'étudiant est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
+
+        if verifier_fil is False and fil.code_document != "":
+            # Effacer le lineEdit du numéro étudiant et afficher le message d'erreur
+            self.lineEdit_code_film.clear()
+            self.label_erreur_code_film.setVisible(True)
+        # si le nom est invalide, afficher un message d'erreur
+        if fil.code_document == "":
+            self.lineEdit_code_film.clear()
+            self.label_erreur_code_inv_film.setVisible(True)
+        # Si le numéro d'étudiant est invalide, effacer le lineEdit du numéro étudiant  et afficher un message d'erreur
+        if fil.titre == "":
+            self.lineEdit_film.clear()
+            self.label_erreur_film_t_inv.setVisible(True)
+        # Si le numéro d'étudiant est invalide, effacer le lineEdit du numéro étudiant  et afficher un message d'erreur
+        if fil.Nb_de_rangee == "":
+            self.lineEdit_nb_rangee_film.clear()
+            self.label_erreur_nb_rangee_film.setVisible(True)
+        # Si le numéro d'étudiant est invalide, effacer le lineEdit du numéro étudiant  et afficher un message d'erreur
+        if fil.genre == "":
+            self.lineEdit_genre.clear()
+            self.label_erreur_genre.setVisible(True)
+        # Si le numéro d'étudiant est invalide, effacer le lineEdit du numéro étudiant  et afficher un message d'erreur
+        if fil.acteur_principal == "":
+            self.lineEdit_acteur_prin.clear()
+            self.label_erreur_annee.setVisible(True)
+        # Si le numéro d'étudiant est invalide, effacer le lineEdit du numéro étudiant  et afficher un message d'erreur
+        if fil.realisateur == "":
+            self.lineEdit_realisateur.clear()
+            self.label_erreur_realisateur.setVisible(True)

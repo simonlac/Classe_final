@@ -156,11 +156,12 @@ class Fenetrelivre(QtWidgets.QDialog, livre_inter.Ui_livre):
                 if liv.code_document == self.lineEdit_code.text() and liv.titre == self.lineEdit_titre.text().capitalize() \
                         and liv.Nb_de_rangee == int(self.lineEdit_nb_rangee.text()) \
                         and liv.auteur == self.lineEdit_auteur.text().capitalize() \
-                        and liv.annee_publication == int(self.lineEdit.text().capitalize()) \
+                        and liv.annee_publication == int(self.lineEdit.text()) \
                         and liv.maison_edition == self.lineEdit_maison.text().capitalize():
                     # Supprimer l'étudiant de la liste des étudiants
                     trouve = True
                     ls_livre.remove(liv)
+                    ls_document.remove(liv)
                     break
             # Si l'étudiant n'existe pas dans la liste afficher un message d'erreur dans le label_erreur_Etu_Inexistant
             if not trouve:

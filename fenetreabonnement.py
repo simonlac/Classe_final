@@ -29,7 +29,7 @@ def verifier_abonner_liste(p_code_abbonnement):
              :return: True si le code de l'abonner est trouvé dans la liste des abonners et False sinon
     """
     for elt in ls_abonner:
-        if elt.p_code_abbonnement == p_code_abbonnement.capitalize():
+        if elt.code_abbonnement == p_code_abbonnement.capitalize():
             return True
     return False
 
@@ -107,3 +107,71 @@ class Fenetreabonnement(QtWidgets.QDialog, abonnement_inter.Ui_Dialog):
             self.lineEdit_nom.clear()
             self.lineEdit_annee_abo.clear()
             self.lineEdit_cour_tele.clear()
+
+    @pyqtSlot()
+    # Bouton Supprimer
+    def on_pushButton_supprimer_abonnement_clicked(self):
+        """
+        Gestionnaire d'évènement pour le bouton Supprimer
+        """
+
+        # Instancier un objet abonner
+        abonn = Abbonement()
+        # Entrée de donnée pour les attributs de l'objet abonner
+        abonn.code_abbonnement = self.lineEdit_code_abonnement.text().capitalize()
+        abonn.type_abbonnement = self.comboBox_type_abonnement.currentText()
+        abonn.nom = self.lineEdit_nom.text().capitalize()
+        abonn.duree = self.comboBox_duree.currentText()
+        abonn.date = int(self.lineEdit_annee_abo.text())
+        abonn.courriel_tele = self.lineEdit_cour_tele.text().capitalize()
+        # Booleen qui nous informe si le numéro d'étudiant existe ou pas dans la liste des étudiants
+        verifier_abo = verifier_abonner_liste(abonn.code_abbonnement)
+        # Si le nom, le numéro et la date de naissance sont valides et l'étudiant existe dans la liste des étudiants:
+        if abonn.code_abbonnement != "" and abonn.nom != "" and abonn.date != "" and abonn.courriel_tele != "" and verifier_abo is True:
+            trouve = False
+            for abon in ls_abonner:
+                # # Chercher dans la liste des étudiants un étudiant ayant les informations entrées
+                if abon.date == self.lineEdit_annee_abo.text() and abon.nom == self.lineEdit_nom.text().capitalize() \
+                        and abon.type_abonnement == self.comboBox_type_abonnement.currentText() \
+                        and abon.duree == self.comboBox_duree.currentText() \
+                        and abon.code_abbonnement == self.lineEdit_code_abonnement.text().capitalize() \
+                        and abon.courriel_tele == self.lineEdit_cour_tele.text().capitalize():
+                    # Supprimer l'étudiant de la liste des étudiants
+                    trouve = True
+                    ls_abonner.remove(abon)
+                    break
+            # Si l'étudiant n'existe pas dans la liste afficher un message d'erreur dans le label_erreur_Etu_Inexistant
+            if not trouve:
+                self.label_erreur_code_inv_abonnement.setVisible(True)
+            else:
+                # Réafficher dans le textBrowser la nouvelle liste qui ne contient pas l'étudiant supprimé
+                self.textBrowser_abonner.clear()
+                for elt in ls_abonner:
+                    self.textBrowser_abonnerr.append(elt.__str__())
+                # Réinitialiser les lineEdit et le dateEdit
+                self.lineEdit_code_abonnement.clear()
+                self.lineEdit_nom.clear()
+                self.lineEdit_annee_abo.clear()
+                self.lineEdit_cour_tele.clear()
+                # Si le numéro d'étudiant est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
+        if verifier_abo is False and abonn.code_abbonnement != "":
+            # Effacer le lineEdit du numéro étudiant et afficher le message d'erreur
+            self.lineEdit_numero.clear()
+            self.label_erreur_Etu_Inexistant.setVisible(True)
+        # si le nom est invalide, afficher un message d'erreur
+        # Si le code de l'abonnement est invalide, effacer le lineEdit du code de l'abonnement  et afficher un message d'erreur
+        if abonn.code_abbonnement == "":
+                self.lineEdit_code_abonnement.clear()
+                self.label_erreur_code_inv_abonnement.setVisible(True)
+        # si le nom est invalide, afficher un message d'erreur
+        if abonn.nom == "":
+                self.lineEdit_nom.clear()
+                self.label_erreur_nom.setVisible(True)
+        # Si la date est invalide, effacer le lineEdit de la date et afficher un message d'erreur
+        if abonn.date == "":
+                self.lineEdit_annee_abo.clear()
+                self.label_erreur_abonnement.setVisible(True)
+        # si le courriel ou télé est invalide, afficher un message d'erreur
+        if abonn.courriel_tele == "":
+                self.lineEdit_cour_tele.clear()
+                self.label_erreur_code_inv_cour_tele.setVisible(True)

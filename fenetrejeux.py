@@ -118,3 +118,77 @@ class Fenetrejeux(QtWidgets.QDialog, jeux_inter.Ui_jeux):
             self.lineEdit_nb_rangee_jeux.clear()
             self.lineEdit_createur.clear()
             self.lineEdit_nb_joueur.clear()
+
+    @pyqtSlot()
+    # Bouton Supprimer
+    def on_pushButton_supprimer_jeux_clicked(self):
+        """
+        Gestionnaire d'évènement pour le bouton Supprimer
+        """
+        # Instancier un objet Eudiant
+        global jeu
+        je = Jeux()
+        # Entrée de donnée pour les attributs de l'objet Etudiant
+        je.code_document = self.lineEdit_code_jeux.text().capitalize()
+        je.titre = self.lineEdit_jeux.text().capitalize()
+        je.Nb_de_rangee = int(self.lineEdit_nb_rangee_jeux.text())
+        je.createur = self.lineEdit_createur.text().capitalize()
+        je.nb_de_joueur = int(self.lineEdit_nb_joueur.text())
+        je.type = self.comboBox_jeu.currentText()
+        # Booleen qui nous informe si le numéro d'étudiant existe ou pas dans la liste des étudiants
+        verifier_je = verifier_document_liste(je.code_document)
+        # Si le nom, le numéro et la date de naissance sont valides et l'étudiant existe dans la liste des étudiants:
+        if je.code_document != "" and je.titre != "" and je.Nb_de_rangee != "" and je.createur != "" and je.nb_de_joueur != "" and verifier_je is True:
+            trouve = False
+            for jeu in ls_jeux and ls_jeux:
+                # # Chercher dans la liste des étudiants un étudiant ayant les informations entrées
+                if jeu.code_document == self.lineEdit_code_jeux.text().capitalize() and jeu.titre == self.lineEdit_jeux.text().capitalize() \
+                        and jeu.Nb_de_rangee == self.lineEdit_nb_rangee_jeux.text() \
+                        and jeu.createur == self.lineEdit_createur.text().capitalize() \
+                        and jeu.nb_de_joueur == self.lineEdit_nb_joueur.text().capitalize() \
+                        and jeu.type == self.comboBox_jeu.currentText():
+                    # Supprimer l'étudiant de la liste des étudiants
+                    trouve = True
+                    ls_jeux.remove(jeu)
+                    ls_jeux.remove(jeu)
+                    break
+            # Si l'étudiant n'existe pas dans la liste afficher un message d'erreur dans le label_erreur_Etu_Inexistant
+            if not trouve:
+                self.label_erreur_code_inv_jeux.setVisible(True)
+            else:
+                # Réafficher dans le textBrowser la nouvelle liste qui ne contient pas l'étudiant supprimé
+                self.textBrowser_jeux.clear()
+                for fi in ls_film:
+                    self.textBrowser_jeux.append(fi.__str__())
+                # Réinitialiser les lineEdit et le dateEdit
+                self.lineEdit_code_jeux.clear()
+                self.lineEdit_jeux.clear()
+                self.lineEdit_nb_rangee_jeux.clear()
+                self.lineEdit_createur.clear()
+                self.lineEdit_nb_joueur.clear()
+                # Si le numéro d'étudiant est valide mais existe déjà dans la liste (on ne peut donc pas l'ajouter)
+        if verifier_je is False and jeu.code_document !="":
+            # Effacer le lineEdit du code du document et afficher le message d'erreur
+            self.lineEdit_code_jeux.clear()
+            self.label_erreur_code_jeux.setVisible(True)
+        # si le titre est invalide, afficher un message d'erreur
+        if jeu.titre == "":
+            self.lineEdit_jeux.clear()
+            self.label_erreur_code_inv_jeux.setVisible(True)
+        # Si le code de document est invalide, effacer le lineEdit du code de document  et afficher un message d'erreur
+        if jeu.code_document == "":
+            self.lineEdit_code_jeux.clear()
+            self.label_erreur_code_inv_jeux.setVisible(True)
+        # si le nombre de rangée est invalide, afficher un message d'erreur
+        if jeu.Nb_de_rangee == 0 or "":
+            self.lineEdit_nb_rangee_jeux.clear()
+            self.label_erreur_nb_rangee_jeux.setVisible(True)
+        # Si le créateur  est invalide, effacer le lineEdit du créateur  et afficher un message d'erreur
+        if jeu.createur == "":
+            self.lineEdit_createur.clear()
+            self.label_erreur_createur.setVisible(True)
+        # Si le nombre de joueur est invalide, afficher un message d'erreur
+        if jeu.nb_de_joueur == "" or 0:
+            self.lineEdit_nb_joueur.clear()
+            self.label_erreur_nb_joueur.setVisible(True)
+
